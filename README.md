@@ -7,7 +7,11 @@ The goal of this project is to perform content-aware image resizing for both red
 
   http://www.eng.tau.ac.il/~avidan/papers/vidret.pdf  
   https://www.merl.com/publications/docs/TR2008-064.pdf  
-
+  
+## Algorithm Overview
+### Seam Removal
+1. Calculate energy map:
+`Hello`
 ## Removal
 ![fig5_07_base](https://user-images.githubusercontent.com/50963416/156672949-f42c79bc-4a4c-4d3c-8651-d2162403e651.png)  
 ![fig5_07_seam_removal](https://user-images.githubusercontent.com/50963416/156672953-f400bf8e-20f7-43b0-9c7d-f44553beda5e.png)  
