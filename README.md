@@ -11,7 +11,19 @@ The goal of this project is to perform content-aware image resizing for both red
 ## Algorithm Overview
 ### Seam Removal
 1. Calculate energy map:  
->Hello
+> Energy is calculated by sum the absolute value of the gradient in both x direction and y direction for all three channel (B, G, R). Energy map is a 2D image with the same dimension as input image.  
+
+2. Build accumulated cost matrix using forward energy: 
+> This step is implemented with dynamic programming. The value of each pixel is equal to its corresponding value in the energy map added to the minimum new neighbor energy introduced by removing one of its three top neighbors (top-left, top-center, and top-right)
+
+3. Find and remove minimum seam from top to bottom edge:  
+> Backtracking from the bottom to the top edge of the accumulated cost matrix to find the minimum seam. All the pixels in each row after the pixel to be removed are shifted over one column to the left if it has index greater than the minimum seam.  
+
+4. Repeat step 1 - 3 until achieving targeting width  
+
+## Seam Insertion
+Seam insertion can be thought of as inversion of seam removal and inserts new artificial pixels/seams into the image. We first perform seam removal for n seams on a duplicated input image and record all the coordinates in the same order when removing. Then, we insert new seams to original input image in the same order at the recorded coordinates location. The inserted artificial pixel values are derived from an average of left and right neighbors.  
+
 ## Removal
 ![fig5_07_base](https://user-images.githubusercontent.com/50963416/156672949-f42c79bc-4a4c-4d3c-8651-d2162403e651.png)  
 ![fig5_07_seam_removal](https://user-images.githubusercontent.com/50963416/156672953-f400bf8e-20f7-43b0-9c7d-f44553beda5e.png)  
